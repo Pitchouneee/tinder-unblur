@@ -2,7 +2,7 @@
 
 ## Description
 
-A JavaScript script that allows you to unblur and display profile images on Tinder without having a mathc.
+A JavaScript script that allows you to unblur and display profile images on Tinder without having a match.
 
 ## Prerequisites
 
