@@ -4,6 +4,10 @@ class TinderUnblur {
         this.previewBaseUrl = 'https://preview.gotinder.com/';
     }
 
+    /**
+    * Retrieve profile teasers from the Tinder API
+    * @returns {Promise<Array>} List of teasers
+    */
     async fetchTeasers() {
         try {
             const response = await fetch(this.apiBaseUrl, {
@@ -20,11 +24,16 @@ class TinderUnblur {
             const data = await response.json();
             return data.data.results || [];
         } catch (error) {
-            console.error('Erreur lors de la récupération des teasers:', error);
+            console.error('Error retrieving teasers:', error);
             return [];
         }
     }
 
+    /**
+    * Builds the URL of the teaser image
+    * @param {Object} user - Teaser user object
+    * @returns {string} Image URL
+    */
     getImageUrl(user) {
         if (!user || !user.photos || user.photos.length === 0) {
             return null;
@@ -32,7 +41,9 @@ class TinderUnblur {
         return `${this.previewBaseUrl}${user._id}/original_${user.photos[0].id}.jpeg`;
     }
 
-
+    /**
+    * Unblur images
+    */
     async unblur() {
         try {
             const teasers = await this.fetchTeasers();
@@ -49,7 +60,7 @@ class TinderUnblur {
                 }
             });
         } catch (error) {
-            console.error('Erreur lors du défloutage:', error);
+            console.error('Error during unblur:', error);
         }
     }
 }
